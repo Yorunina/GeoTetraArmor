@@ -1,0 +1,9 @@
+{
+    "item": "geotetraarmor:feet",
+    "icon": {
+        "textureLocation": "geotetraarmor:textures/gui/gta.png",
+        "textureX": 2,
+        "textureY": 2
+    },
+    "position": 13
+}

@@ -10,11 +10,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
+import ovo.yiran.geotetraarmor.model.GeoModuleModelData;
 import ovo.yiran.geotetraarmor.model.ModularGeoArmorRenderer;
 import se.mickelus.tetra.items.modular.ItemModularHandheld;
 import se.mickelus.tetra.module.ItemModule;
 import se.mickelus.tetra.module.SchematicRegistry;
-import se.mickelus.tetra.module.data.ModuleModel;
+import se.mickelus.tetra.module.model.IModuleModel;
 import se.mickelus.tetra.module.schematic.RepairSchematic;
 import se.mickelus.tetra.properties.AttributeHelper;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -115,40 +116,44 @@ public class ModularArmorItem extends ItemModularHandheld implements GeoItem, Eq
     }
 
     @Override
-    public ImmutableList<ModuleModel> getModels(ItemStack itemStack, @Nullable LivingEntity entity) {
+    public ImmutableList<IModuleModel> getModels(ItemStack itemStack, @Nullable LivingEntity entity) {
         return this.getAllModules(itemStack)
                 .stream()
-                .sorted(Comparator.comparing(ItemModule::getRenderLayer))
+                .sorted(Comparator.comparing(ItemModule::getRenderLayer, Comparator.nullsFirst(Comparator.naturalOrder())))
                 .flatMap((itemModule) -> Arrays.stream(itemModule.getModels(itemStack)))
                 .filter(Objects::nonNull)
                 .filter(ModularArmorItem::modelNotGecko)
-                .sorted(Comparator.comparing(ModuleModel::getRenderLayer))
+                .sorted(Comparator.comparing(IModuleModel::getRenderLayer, Comparator.nullsFirst(Comparator.naturalOrder())))
                 .collect(Collectors.collectingAndThen(Collectors.toList(), ImmutableList::copyOf));
 
     }
 
-    public static boolean modelIsGecko(ModuleModel moduleModel) {
-        return moduleModel.type.startsWith("gecko");
+    public static boolean modelIsGecko(IModuleModel IModuleModel) {
+        return IModuleModel.getType().equals(GeoModuleModelData.TYPE);
     }
 
-    public static boolean modelNotGecko(ModuleModel moduleModel) {
-        return !moduleModel.type.startsWith("gecko");
+    public static boolean modelNotGecko(IModuleModel IModuleModel) {
+        return !IModuleModel.getType().equals(GeoModuleModelData.TYPE);
     }
 
-    public ImmutableList<ModuleModel> getGecModels(ItemStack itemStack, @Nullable LivingEntity entity) {
+    public ImmutableList<GeoModuleModelData> getGecModels(ItemStack itemStack, @Nullable LivingEntity entity) {
         return this.getAllModules(itemStack)
                 .stream()
-                .sorted(Comparator.comparing(ItemModule::getRenderLayer))
+                .sorted(Comparator.comparing(ItemModule::getRenderLayer, Comparator.nullsFirst(Comparator.naturalOrder())))
                 .flatMap((itemModule) -> Arrays.stream(itemModule.getModels(itemStack)))
                 .filter(Objects::nonNull)
                 .filter(ModularArmorItem::modelIsGecko)
-                .sorted(Comparator.comparing(ModuleModel::getRenderLayer))
+                .map(GeoModuleModelData.class::cast)
+                .sorted(Comparator.comparing(GeoModuleModelData::getRenderLayer, Comparator.nullsFirst(Comparator.naturalOrder())))
                 .collect(Collectors.collectingAndThen(Collectors.toList(), ImmutableList::copyOf));
     }
 
     public List<ModularGeoArmorRenderer> geoArmorRenderers(ItemStack itemStack, @Nullable LivingEntity entity) {
         try {
-            return rendererCache.get(this.getModelCacheKey(itemStack, entity), () -> this.getGecModels(itemStack, entity).stream().map(ModularGeoArmorRenderer::new).collect(Collectors.toList()));
+            return rendererCache.get(this.getModelCacheKey(itemStack, entity), () -> this.getGecModels(itemStack, entity)
+                    .stream()
+                    .map(ModularGeoArmorRenderer::new)
+                    .collect(Collectors.toList()));
         } catch (Exception e) {
             e.printStackTrace();
             return ImmutableList.of();

@@ -2,7 +2,9 @@
   "replace": true,
   "type": "tetra:basic_major_module",
   "slots": ["legs/right"],
-  "improvements": [],
+  "improvements": [
+    "tetra:armor/shared/"
+  ],
   "variants": [
     {
       "materials": [
@@ -17,39 +19,42 @@
       ],
       "key": "vanilla_legs_right/",
       "aspects": {
+        "armor": 2,
+        "armor_legs": 2,
+        "wearable": 2,
         "breakable": 2
       },
       "durability": 7,
       "integrity": 1,
-      "attributes": {
-
-      },
+      "contexts": ["armor", "armor_legs"],
       "extract": {
         "primaryAttributes": {
-          "minecraft:generic.armor": 0.5,
-          "minecraft:generic.armor_toughness": 0.5
+          "minecraft:generic.armor": 0.02578,
+          "minecraft:generic.armor_toughness": 0.0339
         },
         "secondaryAttributes": {
-          "minecraft:generic.armor": 0.5,
-          "minecraft:generic.armor_toughness": 0.5
+          "minecraft:generic.armor": -0.00353,
+          "minecraft:generic.armor_toughness": -0.2678
         },
         "tertiaryAttributes": {
-          "minecraft:generic.armor": 0.5,
-          "minecraft:generic.armor_toughness": 0.5
+          "minecraft:generic.armor": 0.37818,
+          "minecraft:generic.armor_toughness": 0.3661
         },
         "primaryEffects":{},
         "secondaryEffects": {},
         "tertiaryEffects": {},
         "durability": 0.3,
-        "integrity": 1,
-        "magicCapacity": 1,
+        "integrity": 0.5,
+        "magicCapacity": 0.5,
         "glyph": {
-          "textureX": 16
+          "textureLocation": "geotetraarmor:textures/gui/gui_gta.png",
+          "textureX": 96,
+          "textureY": 0
         },
         "availableTextures": [ "right" ],
         "models": [
           {
-            "type": "gecko",
+            "type": "tetra:gecko",
             "location": "geotetraarmor:item/armor/vanilla/"
           },
           {

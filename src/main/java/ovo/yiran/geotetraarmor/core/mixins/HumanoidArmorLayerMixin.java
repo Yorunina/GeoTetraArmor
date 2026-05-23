@@ -63,33 +63,6 @@ public abstract class HumanoidArmorLayerMixin<T extends LivingEntity, M extends 
                         this.renderGlint(poseStack, buffer, packedLight, (A) renderer);
                     }
                 });
-                /*
-                armoritem.getGecModels(itemstack, livingEntity).forEach(moduleModel -> {
-                            this.getParentModel().copyPropertiesTo(p_model);
-                            this.setPartVisibility(p_model, slot);
-                            var geoModel =  //new ModularArmorModel<>(moduleModel);
-                                    new DefaultedItemGeoModel<ModularArmorItem>(
-                                    new ResourceLocation(moduleModel.getTexture().getNamespace(), moduleModel.getTexture().getPath().substring(5))
-                            );
-                            GeoArmorRenderer<ModularArmorItem> renderer = new GeoArmorRenderer<ModularArmorItem>(
-                                    geoModel//  new ModularArmorModel<>(moduleModel)
-                            ) {
-                                @Override
-                                public software.bernie.geckolib.core.object.Color getRenderColor(ModularArmorItem animatable, float partialTick, int packedLight) {
-                                    return new Color((moduleModel.getTint() & 0x00FFFFFF) | 0xFF000000);
-                                }
-                            };
-
-                            renderer.prepForRender(livingEntity, itemstack, slot, p_model);
-                            boolean flag = this.usesInnerModel(slot);
-                            this.renderModel(poseStack, buffer, packedLight, armoritem, renderer, flag, 1, 1, 1,geoModel.getTextureResource(armoritem) );
-
-
-                            if (itemstack.hasFoil()) {
-                                this.renderGlint(poseStack, buffer, packedLight, (A) renderer);
-                            }
-                        }
-                );*/
             }
         }
     }

@@ -4,7 +4,9 @@
   "slots": [
     "chest/base"
   ],
-  "improvements": [],
+  "improvements": [
+    "tetra:armor/shared/"
+  ],
   "variants": [
     {
       "materials": [
@@ -15,40 +17,47 @@
       ],
       "key": "heavy_chest_base/",
       "aspects": {
+        "armor": 2,
+        "armor_chest": 2,
+        "wearable": 2,
         "breakable": 2
       },
       "durability": 7,
       "integrity": 1,
+      "contexts": ["armor", "armor_chest"],
+      "attributes": {
+        "**minecraft:generic.movement_speed": -0.05
+      },
       "extract": {
         "primaryAttributes": {
-          "minecraft:generic.armor": 0.5,
-          "minecraft:generic.armor_toughness": 0.5
+          "minecraft:generic.armor": 0.3714,
+          "minecraft:generic.armor_toughness": 0.0857
         },
         "secondaryAttributes": {
-          "minecraft:generic.armor": 0.5,
-          "minecraft:generic.armor_toughness": 0.5
+          "minecraft:generic.armor": -0.1611,
+          "minecraft:generic.armor_toughness": -0.6557
         },
         "tertiaryAttributes": {
-          "minecraft:generic.armor": 0.5,
-          "minecraft:generic.armor_toughness": 0.5
+          "minecraft:generic.armor": 0.9164,
+          "minecraft:generic.armor_toughness": 0.9038
         },
         "primaryEffects": {},
         "secondaryEffects": {},
         "tertiaryEffects": {},
         "durability": 0.3,
-        "integrity": 1,
-        "magicCapacity": 1,
+        "integrity": 0.5,
+        "magicCapacity": 0.5,
         "glyph": {
-          "textureX": 16
+          "textureLocation": "geotetraarmor:textures/gui/gui_gta.png",
+          "textureX": 48,
+          "textureY": 0
         },
-        "availableTextures": ["base"],
+        "availableTextures": [
+          "base"
+        ],
         "models": [
           {
-            "type": "gecko",
-            "location": "geotetraarmor:item/armor/vanilla/"
-          },
-          {
-            "type": "gecko",
+            "type": "tetra:gecko",
             "location": "geotetraarmor:item/armor/heavy/"
           },
           {
