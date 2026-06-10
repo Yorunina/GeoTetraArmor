@@ -29,6 +29,10 @@ public class GeoTetraArmor {
     private static final Logger LOGGER = LogUtils.getLogger();
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+    public static final RegistryObject<Item> HEAD = ITEMS.register("head", ModularHeadItem::new);
+    public static final RegistryObject<Item> FEET = ITEMS.register("feet", ModularFeetItem::new);
+    public static final RegistryObject<Item> CHEST = ITEMS.register("chest", ModularChestItem::new);
+    public static final RegistryObject<Item> LEGS = ITEMS.register("legs", ModularLegsItem::new);
     public GeoTetraArmor() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ITEMS.register(modEventBus);
