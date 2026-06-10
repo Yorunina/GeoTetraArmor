@@ -2,7 +2,6 @@ package ovo.yiran.geotetraarmor.model;
 
 import net.minecraft.resources.ResourceLocation;
 import ovo.yiran.geotetraarmor.items.ModularArmorItem;
-import se.mickelus.tetra.module.model.IModuleModel;
 import software.bernie.geckolib.model.GeoModel;
 
 public class ModularArmorModel<T extends ModularArmorItem> extends GeoModel<T> {
@@ -10,7 +9,7 @@ public class ModularArmorModel<T extends ModularArmorItem> extends GeoModel<T> {
     private ResourceLocation texturePath;
     private ResourceLocation animationsPath;
 
-    public ModularArmorModel(IModuleModel moduleModel) {
+    public ModularArmorModel(GeoModuleModelData moduleModel) {
         modelPath = buildFormattedModelPath(moduleModel.getType());
         texturePath = buildFormattedTexturePath(moduleModel.getType());
         animationsPath = buildFormattedAnimationPath(moduleModel.getType());

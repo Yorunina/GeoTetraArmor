@@ -22,8 +22,10 @@ import ovo.yiran.geotetraarmor.items.ModularChestItem;
 import ovo.yiran.geotetraarmor.items.ModularFeetItem;
 import ovo.yiran.geotetraarmor.items.ModularHeadItem;
 import ovo.yiran.geotetraarmor.items.ModularLegsItem;
+import ovo.yiran.geotetraarmor.model.GeoModuleModelData;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.items.InitializableItem;
+import se.mickelus.tetra.module.model.ModuleModelRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,7 @@ public class GeoTetraArmor {
         modEventBus.register(CompatHandler.class);
         modEventBus.addListener(this::onCommonSetup);
         modEventBus.addListener(this::onBuildCreativeModeTab);
+        ModuleModelRegistry.register("tetra:gecko", GeoModuleModelData.class);
     }
 
     public void onCommonSetup(final FMLCommonSetupEvent event) {

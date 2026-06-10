@@ -13,6 +13,7 @@ import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
 import ovo.yiran.geotetraarmor.GeoTetraArmor;
 import ovo.yiran.geotetraarmor.core.mixins.accessor.IModularItemAccessor;
+import ovo.yiran.geotetraarmor.model.GeoModuleModelData;
 import ovo.yiran.geotetraarmor.model.ModularGeoArmorRenderer;
 import se.mickelus.tetra.items.modular.ItemModularHandheld;
 import se.mickelus.tetra.module.ItemModule;
@@ -154,27 +155,31 @@ public abstract class ModularArmorItem extends ItemModularHandheld implements Ge
     }
 
     public static boolean modelIsGecko(IModuleModel moduleModel) {
-        return moduleModel.getType().toString().startsWith("gecko");
+        return moduleModel instanceof GeoModuleModelData;
     }
 
     public static boolean modelNotGecko(IModuleModel moduleModel) {
-        return !moduleModel.getType().toString().startsWith("gecko");
+        return !(moduleModel instanceof GeoModuleModelData);
     }
 
-    public ImmutableList<IModuleModel> getGecModels(ItemStack itemStack, @Nullable LivingEntity entity) {
+    public ImmutableList<GeoModuleModelData> getGecModels(ItemStack itemStack, @Nullable LivingEntity entity) {
         return this.getAllModules(itemStack)
                 .stream()
                 .sorted(Comparator.comparing(ItemModule::getRenderLayer))
                 .flatMap((itemModule) -> Arrays.stream(itemModule.getModels(itemStack)))
                 .filter(Objects::nonNull)
                 .filter(ModularArmorItem::modelIsGecko)
+                .map(GeoModuleModelData.class::cast)
                 .sorted(Comparator.comparing(IModuleModel::getRenderLayer))
                 .collect(Collectors.collectingAndThen(Collectors.toList(), ImmutableList::copyOf));
     }
 
     public List<ModularGeoArmorRenderer> geoArmorRenderers(ItemStack itemStack, @Nullable LivingEntity entity) {
         try {
-            return rendererCache.get(this.getModelCacheKey(itemStack, entity), () -> this.getGecModels(itemStack, entity).stream().map(ModularGeoArmorRenderer::new).collect(Collectors.toList()));
+            return rendererCache.get(this.getModelCacheKey(itemStack, entity), () -> this.getGecModels(itemStack, entity)
+                    .stream()
+                    .map(ModularGeoArmorRenderer::new)
+                    .collect(Collectors.toList()));
         } catch (Exception e) {
             e.printStackTrace();
             return ImmutableList.of();
