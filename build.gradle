@@ -138,9 +138,9 @@ dependencies {
     //compat
     modImplementation("curse.maven:extraholopage-1301292:7021781")
     //tetra
-    modImplementation("curse.maven:mutil-351914:6418901")
+    modImplementation("curse.maven:mutil-351914:7772906")
+    modImplementation("curse.maven:tetra-289712:8050534")
     modImplementation("curse.maven:geckolib-388172:6920925")
-    modImplementation("curse.maven:tetra-289712:6418957")
 }
 
 // Uncomment the lines below if you wish to configure mixin. The mixin file should be named modid.mixins.json.

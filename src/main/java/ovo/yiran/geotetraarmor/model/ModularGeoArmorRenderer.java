@@ -4,7 +4,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.EquipmentSlot;
 import ovo.yiran.geotetraarmor.items.ModularArmorItem;
-import se.mickelus.tetra.module.data.ModuleModel;
+import se.mickelus.tetra.module.model.IModuleModel;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.core.object.Color;
@@ -17,9 +17,9 @@ import java.util.Objects;
 public class ModularGeoArmorRenderer extends GeoArmorRenderer<ModularArmorItem> {
     public Color color;
     protected GeoBone belt = null;
-    public ModularGeoArmorRenderer(ModuleModel moduleModel) {
+    public ModularGeoArmorRenderer(IModuleModel moduleModel) {
         super(new ModularArmorModel<>(moduleModel));
-        color = new Color((moduleModel.tint & 0x00FFFFFF) | 0xFF000000);
+        color = new Color((moduleModel.getOverlayTint().getRaw() & 0x00FFFFFF) | 0xFF000000);
     }
 
     @Override
