@@ -11,10 +11,11 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.DigDurabilityEnchantment;
 import ovo.yiran.geotetraarmor.GeoTetraArmor;
-import ovo.yiran.geotetraarmor.core.mixins.accessor.IModularItemAccessor;
 import ovo.yiran.geotetraarmor.model.GeoModuleModelData;
 import ovo.yiran.geotetraarmor.model.ModularGeoArmorRenderer;
+import se.mickelus.tetra.effect.ItemEffect;
 import se.mickelus.tetra.items.modular.ItemModularHandheld;
 import se.mickelus.tetra.module.ItemModule;
 import se.mickelus.tetra.module.SchematicRegistry;
@@ -57,7 +58,7 @@ public abstract class ModularArmorItem extends ItemModularHandheld implements Ge
         int damage = itemStack.getDamageValue();
         int maxDamage = itemStack.getMaxDamage();
         if (!this.isBroken(damage, maxDamage)) {
-            int reducedAmount = ((IModularItemAccessor) this).getReducedDamage(amount, itemStack, responsibleEntity);
+            int reducedAmount = this.getReducedDamage(amount, itemStack, responsibleEntity);
             itemStack.hurtAndBreak(amount, responsibleEntity, (player) -> player.broadcastBreakEvent(EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, slot)));
             //打磨
             tickProgression(responsibleEntity, itemStack, reducedAmount);
@@ -67,7 +68,23 @@ public abstract class ModularArmorItem extends ItemModularHandheld implements Ge
                 responsibleEntity.playSound(SoundEvents.SHIELD_BREAK, 1.0F, 1.0F);
             }
         }
+    }
 
+    private int getReducedDamage(int amount, ItemStack itemStack, @Nullable LivingEntity responsibleEntity) {
+        if (amount <= 0) {
+            return amount;
+        } else {
+            int level = this.getEffectLevel(itemStack, ItemEffect.unbreaking);
+            int reduction = 0;
+            if (level > 0) {
+                for(int i = 0; i < amount; ++i) {
+                    if (DigDurabilityEnchantment.shouldIgnoreDurabilityDrop(itemStack, level, responsibleEntity.level().random)) {
+                        ++reduction;
+                    }
+                }
+            }
+            return amount - reduction;
+        }
     }
 
     @Override
@@ -145,32 +162,31 @@ public abstract class ModularArmorItem extends ItemModularHandheld implements Ge
     public ImmutableList<IModuleModel> getModels(ItemStack itemStack, @Nullable LivingEntity entity) {
         return this.getAllModules(itemStack)
                 .stream()
-                .sorted(Comparator.comparing(ItemModule::getRenderLayer))
+                .sorted(Comparator.comparing(ItemModule::getRenderLayer, Comparator.nullsFirst(Comparator.naturalOrder())))
                 .flatMap((itemModule) -> Arrays.stream(itemModule.getModels(itemStack)))
                 .filter(Objects::nonNull)
                 .filter(ModularArmorItem::modelNotGecko)
-                .sorted(Comparator.comparing(IModuleModel::getRenderLayer))
+                .sorted(Comparator.comparing(IModuleModel::getRenderLayer, Comparator.nullsFirst(Comparator.naturalOrder())))
                 .collect(Collectors.collectingAndThen(Collectors.toList(), ImmutableList::copyOf));
-
     }
 
-    public static boolean modelIsGecko(IModuleModel moduleModel) {
-        return moduleModel instanceof GeoModuleModelData;
+    public static boolean modelIsGecko(IModuleModel IModuleModel) {
+        return IModuleModel.getType().equals(GeoModuleModelData.TYPE);
     }
 
-    public static boolean modelNotGecko(IModuleModel moduleModel) {
-        return !(moduleModel instanceof GeoModuleModelData);
+    public static boolean modelNotGecko(IModuleModel IModuleModel) {
+        return !IModuleModel.getType().equals(GeoModuleModelData.TYPE);
     }
 
     public ImmutableList<GeoModuleModelData> getGecModels(ItemStack itemStack, @Nullable LivingEntity entity) {
         return this.getAllModules(itemStack)
                 .stream()
-                .sorted(Comparator.comparing(ItemModule::getRenderLayer))
+                .sorted(Comparator.comparing(ItemModule::getRenderLayer, Comparator.nullsFirst(Comparator.naturalOrder())))
                 .flatMap((itemModule) -> Arrays.stream(itemModule.getModels(itemStack)))
                 .filter(Objects::nonNull)
                 .filter(ModularArmorItem::modelIsGecko)
                 .map(GeoModuleModelData.class::cast)
-                .sorted(Comparator.comparing(IModuleModel::getRenderLayer))
+                .sorted(Comparator.comparing(GeoModuleModelData::getRenderLayer, Comparator.nullsFirst(Comparator.naturalOrder())))
                 .collect(Collectors.collectingAndThen(Collectors.toList(), ImmutableList::copyOf));
     }
 

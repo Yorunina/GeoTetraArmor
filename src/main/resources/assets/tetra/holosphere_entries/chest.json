@@ -1,0 +1,9 @@
+{
+    "item": "geotetraarmor:chest",
+    "icon": {
+        "textureLocation": "geotetraarmor:textures/gui/gta.png",
+        "textureX": 44,
+        "textureY": 2
+    },
+    "position": 11
+}

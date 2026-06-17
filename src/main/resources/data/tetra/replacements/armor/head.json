@@ -19,6 +19,15 @@
   },
   {
     "predicate": {
+      "items": [ "minecraft:copper_helmet" ]
+    },
+    "item": "geotetraarmor:head",
+    "modules": {
+      "head/base": [ "armor/head/base/vanilla", "vanilla_head_base/copper" ]
+    }
+  },
+  {
+    "predicate": {
       "items": [ "minecraft:golden_helmet" ]
     },
     "item": "geotetraarmor:head",

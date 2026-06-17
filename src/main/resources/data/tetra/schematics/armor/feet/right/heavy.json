@@ -18,6 +18,7 @@
                 "tetra:metal/",
                 "tetra:bone/"
             ],
+            "countFactor": 2,
             "moduleKey": "armor/feet/right/heavy",
             "moduleVariant": "heavy_feet_right/"
         }

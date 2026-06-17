@@ -32,23 +32,23 @@
       },
       "extract": {
         "primaryAttributes": {
-          "minecraft:generic.armor": 0.0619,
-          "minecraft:generic.armor_toughness": 0.0814
+          "minecraft:generic.armor": 0.9,
+          "minecraft:generic.armor_toughness": 0.8
         },
         "secondaryAttributes": {
-          "minecraft:generic.armor": -0.0085,
-          "minecraft:generic.armor_toughness": -0.6427
+          "minecraft:generic.armor": -0.01,
+          "minecraft:generic.armor_toughness": -0.6
         },
         "tertiaryAttributes": {
-          "minecraft:generic.armor": 0.9076,
-          "minecraft:generic.armor_toughness": 0.8785
+          "minecraft:generic.armor": 0.05,
+          "minecraft:generic.armor_toughness": 0.1
         },
         "primaryEffects":{},
         "secondaryEffects": {},
         "tertiaryEffects": {},
         "durability": 0.3,
-        "integrity": 1,
-        "magicCapacity": 1,
+        "integrity": 0.5,
+        "magicCapacity": 0.5,
         "glyph": {
           "textureLocation": "geotetraarmor:textures/gui/gui_gta.png",
           "textureX": 112,
@@ -57,7 +57,7 @@
         "availableTextures": ["base"],
         "models": [
           {
-            "type": "gecko",
+            "type": "tetra:gecko",
             "location": "geotetraarmor:item/armor/heavy/"
           },
           {

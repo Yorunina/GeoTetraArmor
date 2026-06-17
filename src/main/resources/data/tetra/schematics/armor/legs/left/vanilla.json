@@ -11,6 +11,7 @@
     "outcomes": [
         {
             "materials": ["tetra:wood/","tetra:gem/","tetra:metal/","tetra:bone/","tetra:fabric/","tetra:fibre/","tetra:skin/","tetra:scale/"],
+            "countFactor": 2,
             "moduleKey": "armor/legs/left/vanilla",
             "moduleVariant": "vanilla_legs_left/"
         }

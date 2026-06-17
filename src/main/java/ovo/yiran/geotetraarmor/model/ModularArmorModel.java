@@ -10,9 +10,9 @@ public class ModularArmorModel<T extends ModularArmorItem> extends GeoModel<T> {
     private ResourceLocation animationsPath;
 
     public ModularArmorModel(GeoModuleModelData moduleModel) {
-        modelPath = buildFormattedModelPath(moduleModel.getType());
-        texturePath = buildFormattedTexturePath(moduleModel.getType());
-        animationsPath = buildFormattedAnimationPath(moduleModel.getType());
+        modelPath = buildFormattedModelPath(moduleModel.getLocation());
+        texturePath = buildFormattedTexturePath(moduleModel.getLocation());
+        animationsPath = buildFormattedAnimationPath(moduleModel.getLocation());
     }
 
     @Override

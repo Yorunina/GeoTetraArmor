@@ -43,6 +43,10 @@ public class GeoTetraArmor {
     public static final RegistryObject<Item> CHEST = ITEMS.register("chest", ModularChestItem::new);
     public static final RegistryObject<Item> LEGS = ITEMS.register("legs", ModularLegsItem::new);
 
+    static {
+        ModuleModelRegistry.register("tetra:gecko", GeoModuleModelData.class);
+    }
+
     public GeoTetraArmor() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModLoadingContext.get().registerConfig(
@@ -53,7 +57,6 @@ public class GeoTetraArmor {
         modEventBus.register(CompatHandler.class);
         modEventBus.addListener(this::onCommonSetup);
         modEventBus.addListener(this::onBuildCreativeModeTab);
-        ModuleModelRegistry.register("tetra:gecko", GeoModuleModelData.class);
     }
 
     public void onCommonSetup(final FMLCommonSetupEvent event) {

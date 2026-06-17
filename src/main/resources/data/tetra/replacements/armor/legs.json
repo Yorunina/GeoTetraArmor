@@ -23,6 +23,17 @@
   },
   {
     "predicate": {
+      "items": [ "minecraft:copper_leggings" ]
+    },
+    "item": "geotetraarmor:legs",
+    "modules": {
+      "legs/belt": [ "armor/legs/belt/vanilla", "vanilla_legs_belt/copper" ],
+      "legs/left": [ "armor/legs/left/vanilla", "vanilla_legs_left/copper" ],
+      "legs/right": [ "armor/legs/right/vanilla", "vanilla_legs_right/copper" ]
+    }
+  },
+  {
+    "predicate": {
       "items": [ "minecraft:golden_leggings" ]
     },
     "item": "geotetraarmor:legs",

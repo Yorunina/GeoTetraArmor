@@ -29,23 +29,23 @@
       "contexts": ["armor", "armor_legs"],
       "extract": {
         "primaryAttributes": {
-          "minecraft:generic.armor": 0.05155,
-          "minecraft:generic.armor_toughness": 0.0678
+          "minecraft:generic.armor": 0.75,
+          "minecraft:generic.armor_toughness": 0.7
         },
         "secondaryAttributes": {
-          "minecraft:generic.armor": -0.00705,
-          "minecraft:generic.armor_toughness": -0.5356
+          "minecraft:generic.armor": -0.01,
+          "minecraft:generic.armor_toughness": -0.5
         },
         "tertiaryAttributes": {
-          "minecraft:generic.armor": 0.75635,
-          "minecraft:generic.armor_toughness": 0.7321
+          "minecraft:generic.armor": 0.05,
+          "minecraft:generic.armor_toughness": 0.05
         },
         "primaryEffects":{},
         "secondaryEffects": {},
         "tertiaryEffects": {},
         "durability": 0.3,
-        "integrity": 1,
-        "magicCapacity": 1,
+        "integrity": 0.5,
+        "magicCapacity": 0.5,
         "glyph": {
           "textureLocation": "geotetraarmor:textures/gui/gui_gta.png",
           "textureX": 112,
@@ -54,7 +54,7 @@
         "availableTextures": ["base"],
         "models": [
           {
-            "type": "gecko",
+            "type": "tetra:gecko",
             "location": "geotetraarmor:item/armor/vanilla/"
           },
           {

@@ -21,6 +21,16 @@
   },
   {
     "predicate": {
+      "items": [ "minecraft:copper_boots" ]
+    },
+    "item": "geotetraarmor:feet",
+    "modules": {
+      "feet/left": [ "armor/feet/left/vanilla", "vanilla_feet_left/copper" ],
+      "feet/right": [ "armor/feet/right/vanilla", "vanilla_feet_right/copper" ]
+    }
+  },
+  {
+    "predicate": {
       "items": [ "minecraft:golden_boots" ]
     },
     "item": "geotetraarmor:feet",

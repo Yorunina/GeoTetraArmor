@@ -23,6 +23,17 @@
   },
   {
     "predicate": {
+      "items": [ "minecraft:copper_chestplate" ]
+    },
+    "item": "geotetraarmor:chest",
+    "modules": {
+      "chest/left": [ "armor/chest/left/vanilla", "vanilla_chest_left/copper" ],
+      "chest/right": [ "armor/chest/right/vanilla", "vanilla_chest_right/copper" ],
+      "chest/base": [ "armor/chest/base/vanilla", "vanilla_chest_base/copper" ]
+    }
+  },
+  {
+    "predicate": {
       "items": [ "minecraft:golden_chestplate" ]
     },
     "item": "geotetraarmor:chest",
